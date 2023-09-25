@@ -19,7 +19,6 @@ import (
 	"fmt"
 	"io"
 	"strings"
-	"testing"
 )
 
 type testDataReader struct {
@@ -31,7 +30,7 @@ type testDataReader struct {
 }
 
 func newTestDataReader(
-	t testing.TB, sourceName string, file io.Reader, record bool,
+	t TB, sourceName string, file io.Reader, record bool,
 ) *testDataReader {
 	t.Helper()
 
@@ -47,7 +46,7 @@ func newTestDataReader(
 	}
 }
 
-func (r *testDataReader) Next(t testing.TB) bool {
+func (r *testDataReader) Next(t TB) bool {
 	t.Helper()
 
 	for r.scanner.Scan() {
@@ -121,7 +120,7 @@ func (r *testDataReader) Next(t testing.TB) bool {
 	return false
 }
 
-func (r *testDataReader) readExpected(t testing.TB) {
+func (r *testDataReader) readExpected(t TB) {
 	var buf bytes.Buffer
 	var line string
 	var allowBlankLines bool

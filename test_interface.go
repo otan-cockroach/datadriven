@@ -21,14 +21,14 @@ import (
 
 // subTest delegates to a suitable implementation of Run().
 // This will be obsoleted when we're comfortable using 1.18 templates.
-func subTest(t testing.TB, name string, f func(t testing.TB)) {
+func subTest(t TB, name string, f func(t TB)) {
 	switch t := t.(type) {
 	case *testing.T:
 		t.Run(name, func(t *testing.T) { f(t) })
 	case *testing.B:
 		t.Run(name, func(t *testing.B) { f(t) })
 	case interface {
-		Run(string, func(testing.TB))
+		Run(string, func(TB))
 	}:
 		t.Run(name, f)
 	default:
